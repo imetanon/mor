@@ -37,10 +37,7 @@
                     <a href="<?php echo site_url('/application'); ?>">Application</a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url(''); ?>">Template Category</a>
-                </li>
-                <li>
-                    <a href="<?php echo site_url(''); ?>">Template</a>
+                    <a href="<?php echo site_url('/sms-template'); ?>">SMS-Template</a>
                 </li>
                 <li>
                     <a href="<?php echo site_url(''); ?>">Workflow</a>

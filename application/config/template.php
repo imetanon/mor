@@ -25,7 +25,7 @@ $config['template_css'] = array(
 $config['template_js'] = array(
     '/assets/js/jquery.js' => TRUE,
     '/assets/js/bootstrap.min.js' => TRUE,
-    '/assets/js/mos.js' => TRUE,
+    '/assets/js/mor.js' => TRUE,
     // 'https://code.jquery.com/jquery-2.1.1.min.js' => FALSE,
 );
 

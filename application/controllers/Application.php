@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Application extends MY_Controller {
 	
-	protected $models = array('application');
+	protected $models = array('application','sms_template');
 	
 	public function index()
 	{
@@ -11,14 +11,16 @@ class Application extends MY_Controller {
 		$data['applications'] = $this->application->get_all();
 		$this->template->add_js("https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js", TRUE);
 		$this->template->add_js("https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js", TRUE);
+		$this->template->add_js("/assets/js/datatable.mor.js", TRUE);
 		$this->template->render("application/application",$data);
 	}
 	
 	public function show($id = NULL)
 	{
-		$data['application'] = $this->application->get($id);
+		$data['application'] = $this->application->with('sms_templates')->get($id);
 		$this->template->add_js("https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js", TRUE);
 		$this->template->add_js("https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js", TRUE);
+		$this->template->add_js("/assets/js/datatable.mor.js", TRUE);
 		$this->template->add_title_segment($data['application']->application_name);
 		$this->template->render("application/show",$data);
 	}
@@ -46,8 +48,11 @@ class Application extends MY_Controller {
 		    );
 		    if(($id = $this->application->insert($data)) != false){
 		    	$this->session->set_flashdata('success', 'Application Added');
-		    	$data['application'] = $this->application->get($id);
-		    	$this->template->add_title_segment($data['application']->application_name);
+				$data['application'] = $this->application->with('sms_templates')->get($id);
+				$this->template->add_js("https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js", TRUE);
+				$this->template->add_js("https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js", TRUE);
+				$this->template->add_js("/assets/js/datatable.mor.js", TRUE);
+				$this->template->add_title_segment($data['application']->application_name);
 				$this->template->render("application/show",$data);
 		    }
 	    }
@@ -77,8 +82,11 @@ class Application extends MY_Controller {
         	);
             if($this->application->update($id, $data) != false){
             	$this->session->set_flashdata('success', 'Application Updated');
-		    	$data['application'] = $this->application->get($id);
-		    	$this->template->add_title_segment($data['application']->application_name);
+				$data['application'] = $this->application->get($id);
+				$this->template->add_js("https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js", TRUE);
+				$this->template->add_js("https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js", TRUE);
+				$this->template->add_js("/assets/js/datatable.mor.js", TRUE);
+				$this->template->add_title_segment($data['application']->application_name);
 				$this->template->render("application/show",$data);
             }
         }
@@ -91,6 +99,12 @@ class Application extends MY_Controller {
 	    if (empty($id))
 	    {
 	        show_404();
+	    }
+	    
+	    $sms_templates = $this->sms_template->get_many_by('application_id',$id);
+	    foreach($sms_templates as $template)
+	    {
+	    	$this->sms_template->delete($template->sms_template_id);
 	    }
 	    
 	    if($this->application->delete($id) != false){

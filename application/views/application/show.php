@@ -15,37 +15,39 @@
                 </div>
                 <div class="panel-body">
                     <?php echo form_open('application/edit/'.$application->application_id, 'class="form-horizontal"'); ?>
-                        <?php if(validation_errors()):?>
-                        <div class="alert alert-warning alert-danger" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>Warning!</strong> <?php echo validation_errors(); ?>
+                    <?php if(validation_errors()):?>
+                    <div class="alert alert-warning alert-danger" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong>
+                        <?php echo validation_errors(); ?>
+                    </div>
+                    <?php endif;?>
+                    <?php if($this->session->flashdata('success')):?>
+                    <div class="alert alert-success" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Well done!</strong>
+                        <?php echo $this->session->flashdata('success'); ?>
+                    </div>
+                    <?php endif;?>
+                    <div class="form-group">
+                        <label for="inputDepartmentName" class="col-sm-2 control-label">Application Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="inputApplicationName" class="form-control" id="inputDepartmentName" placeholder="Department Name" value="<?php echo $application->application_name ?>" disabled>
                         </div>
-                        <?php endif;?>
-                        <?php if($this->session->flashdata('success')):?>
-                        <div class="alert alert-success" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <strong>Well done!</strong> <?php echo $this->session->flashdata('success'); ?>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputDescription" class="col-sm-2 control-label">Description</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" name="inputDescription" id="inputDescription" rows="5"><?php echo $application->application_description ?></textarea>
                         </div>
-                        <?php endif;?>
-                        <div class="form-group">
-                            <label for="inputDepartmentName" class="col-sm-2 control-label">Application Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="inputApplicationName" class="form-control" id="inputDepartmentName" placeholder="Department Name" value="<?php echo $application->application_name ?>" disabled>
-                            </div>
+                    </div>
+                    <input type="hidden" name="id" value="<?php echo $this->uri->segment(2); ?>" />
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                            <a href="<?php echo site_url('/application/delete/'.$application->application_id); ?>" class="btn btn-danger" role="button">Delete</a>
                         </div>
-                         <div class="form-group">
-                            <label for="inputDescription" class="col-sm-2 control-label">Description</label>
-                            <div class="col-sm-10">
-                                <textarea class="form-control" name="inputDescription" id="inputDescription" rows="5"><?php echo $application->application_description ?></textarea>
-                            </div>
-                        </div>
-                        <input type="hidden" name="id" value="<?php echo $this->uri->segment(2); ?>"/>
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <a href="<?php echo site_url('/application/delete/'.$application->application_id); ?>" class="btn btn-danger" role="button">Delete</a>
-                            </div>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -55,9 +57,9 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Category
+                    SMS-Template
                     <div class="pull-right">
-                        <a class="btn btn-primary btn-xs" href="template_category_add.html" role="button">
+                        <a class="btn btn-primary btn-xs" href="<?php echo site_url('/sms-template/add'); ?>" role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                         </a>
                     </div>
@@ -66,29 +68,25 @@
                     <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Template Category</th>
-                                <th>Description</th>
-                                <th>Template Count</th>
+                                <th>Template Name</th>
+                                <th>Message</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Template Category</th>
-                                <th>Description</th>
-                                <th>Template Count</th>
+                                <th>Template Name</th>
+                                <th>Message</th>
                             </tr>
                         </tfoot>
                         <tbody>
+                            <?php foreach ($application->sms_templates as $template): ?>
                             <tr>
-                                <td><a href="template_category_edit.html">Category 10</a></td>
-                                <td>Category Description... Blah Blah</td>
-                                <td>1</td>
+                                <td><a href="<?php echo site_url('/sms-template/'. $template->sms_template_id); ?>"><?php echo $template->sms_template_name; ?></a></td>
+                                <td>
+                                    <?php echo $template->sms_template_message; ?>
+                                </td>
                             </tr>
-                            <tr>
-                                <td><a href="template_category_edit.html">Category 11</a></td>
-                                <td>Category Description... Blah Blah</td>
-                                <td>1</td>
-                            </tr>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

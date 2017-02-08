@@ -1,6 +1,4 @@
 $(document).ready(function() {
-    $('#example').DataTable();
-    
     //SMS Character Counting
     var $remaining = $('#remaining'),
         $messages = $remaining.next();

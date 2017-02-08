@@ -58,3 +58,10 @@ $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/
 
 $route['application/(:num)'] = 'application/show/$1';
 
+$route['sms-template'] = 'sms_template';
+$route['sms-template/(:num)'] = 'sms_template/show/$1';
+$route['sms-template/add'] = 'sms_template/add';
+$route['sms-template/save'] = 'sms_template/save';
+$route['sms-template/edit/(:num)'] = 'sms_template/edit';
+
+
