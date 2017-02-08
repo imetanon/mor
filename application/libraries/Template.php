@@ -295,6 +295,12 @@ class Template
     private function script_tag($src = NULL)
     {
         if (isset($src) and !empty($src)) {
+
+            if ( strpos($src, '://') == FALSE)
+            {
+                $src = base_url($src);
+            }
+
             return '<script src="' . $src . '" type="text/javascript"></script>';
         }
 
