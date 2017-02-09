@@ -53,8 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
-$route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
+// $route['api/example/users/(:num)'] = 'api/example/users/id/$1'; // Example 4
+// $route['api/example/users/(:num)(\.)([a-zA-Z0-9_-]+)(.*)'] = 'api/example/users/id/$1/format/$3$4'; // Example 8
+
+
+
+$route['api/sms/form/(:num)'] = 'api/sms/form/appid/$1';
 
 $route['application/(:num)'] = 'application/show/$1';
 
@@ -63,5 +67,9 @@ $route['sms-template/(:num)'] = 'sms_template/show/$1';
 $route['sms-template/add'] = 'sms_template/add';
 $route['sms-template/save'] = 'sms_template/save';
 $route['sms-template/edit/(:num)'] = 'sms_template/edit';
+
+$route['sms-form'] = 'sms_form';
+$route['sms-form/form'] = 'sms_form/form';
+$route['sms-form/(:num)'] = 'sms_form/form/$1';
 
 

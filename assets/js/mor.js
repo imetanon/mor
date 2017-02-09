@@ -55,7 +55,7 @@ $(document).ready(function() {
     });
     
     $("#sms-select-template").change(function(){
-        var selectedTemplate = $("#sms-select-template option:selected").val();
+        var selectedTemplate = $('#sms-select-template option:selected').data('sms')
         if(selectedTemplate == "None"){
             selectedTemplate = "";
         }

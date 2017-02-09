@@ -825,7 +825,9 @@ abstract class REST_Controller extends \CI_Controller {
 
         // Output the data
         $this->output->set_output($output);
-
+        //https://github.com/chriskacerguis/codeigniter-restserver/issues/753#issuecomment-273968372
+        $this->output->_display();
+        exit; 
         ob_end_flush();
 
         // Otherwise dump the output automatically

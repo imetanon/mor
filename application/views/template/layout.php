@@ -46,7 +46,7 @@
                     <a href="<?php echo site_url(''); ?>">Logs</a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url(''); ?>">SMS Form</a>
+                    <a href="<?php echo site_url('/sms-form'); ?>">SMS Form</a>
                 </li>
             </ul>
         </div>
