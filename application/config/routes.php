@@ -72,4 +72,7 @@ $route['sms-form'] = 'sms_form';
 $route['sms-form/form'] = 'sms_form/form';
 $route['sms-form/(:num)'] = 'sms_form/form/$1';
 
+$route['workflow/(:num)'] = 'workflow/show/$1';
+$route['workflow/edit/(:num)'] = 'workflow/edit';
+
 

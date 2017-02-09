@@ -40,7 +40,7 @@
                     <a href="<?php echo site_url('/sms-template'); ?>">SMS-Template</a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url(''); ?>">Workflow</a>
+                    <a href="<?php echo site_url('/workflow'); ?>">Workflow</a>
                 </li>
                 <li>
                     <a href="<?php echo site_url(''); ?>">Logs</a>
