@@ -30,9 +30,9 @@
                         Message of Right
                     </a>
                 </li>
-                <li>
-                    <a href="<?php echo site_url(''); ?>">Dashboard</a>
-                </li>
+                <!--<li>-->
+                <!--    <a href="<?php echo site_url(''); ?>">Dashboard</a>-->
+                <!--</li>-->
                 <li>
                     <a href="<?php echo site_url('/application'); ?>">Application</a>
                 </li>
@@ -43,7 +43,7 @@
                     <a href="<?php echo site_url('/workflow'); ?>">Workflow</a>
                 </li>
                 <li>
-                    <a href="<?php echo site_url(''); ?>">Logs</a>
+                    <a href="<?php echo site_url('/log'); ?>">Logs</a>
                 </li>
                 <li>
                     <a href="<?php echo site_url('/sms-form'); ?>">SMS Form</a>

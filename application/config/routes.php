@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'application';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
@@ -59,6 +59,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 
 $route['api/sms/form/(:num)'] = 'api/sms/form/appid/$1';
+$route['api/sms/process/(:num)'] = 'api/sms/process/workflowid/$1';
 
 $route['application/(:num)'] = 'application/show/$1';
 
@@ -69,10 +70,12 @@ $route['sms-template/save'] = 'sms_template/save';
 $route['sms-template/edit/(:num)'] = 'sms_template/edit';
 
 $route['sms-form'] = 'sms_form';
+$route['sms-form/workflow'] = 'sms_form/workflow';
 $route['sms-form/form'] = 'sms_form/form';
-$route['sms-form/(:num)'] = 'sms_form/form/$1';
+
 
 $route['workflow/(:num)'] = 'workflow/show/$1';
 $route['workflow/edit/(:num)'] = 'workflow/edit';
 
+$route['log'] = 'sms_log';
 

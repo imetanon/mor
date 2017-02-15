@@ -13,9 +13,6 @@
                         <a class="btn btn-primary btn-xs" href="<?php echo site_url('/sms-template/add'); ?>" role="button">
                             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
                         </a>
-                        <a class="btn btn-success btn-xs" href="template_category.html" role="button">
-                            <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Category Lists
-                        </a>
                     </div>
                 </div>
                 <div class="panel-body">

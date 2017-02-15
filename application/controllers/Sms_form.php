@@ -9,22 +9,12 @@ class Sms_form extends MY_Controller {
 	
 	public function index()
 	{
-	       
-	   
         $data['applications'] = $this->application->get_all();
         $this->template->add_title_segment("SMS Form");
         $this->template->render("sms_form/sms_application",$data);
         	
-                // echo "<pre>";
-                // echo $response->code."<br>";
-                // var_dump($response->code);
-        
-                // var_dump($response->headers['content-type']);
-        
-                // var_dump($response->body);
-                // echo "</pre>";
 	}
-	
+
 	public function form()
 	{
         
@@ -40,6 +30,8 @@ class Sms_form extends MY_Controller {
         $parameters = array('MOR-API-KEY' => 'passingkey');
         $response = Unirest\Request::get($url.$appid, $headers, $parameters);
         $data['sms_templates']  = $response->body->sms_templates;
+        $data['workflows']  = $response->body->workflows;
+        $data['application_id'] = $appid;
         $this->template->add_title_segment("SMS Form");
         $this->template->render("sms_form/sms_form",$data);
 	}
@@ -48,15 +40,25 @@ class Sms_form extends MY_Controller {
 	{
         $this->form_validation->set_rules('inputTo', 'Telephone Number', 'required');
         $this->form_validation->set_rules('inputMessage', 'Message', 'required');
+        $appid = $this->input->post('application_id');
+        echo $appid;
         
         if ($this->form_validation->run() === FALSE)
         {
-            $this->template->render("sms_form/sms_form");
+            $url = site_url('api/sms/form/');
+            $headers = array('Accept' => 'application/json');
+            $parameters = array('MOR-API-KEY' => 'passingkey');
+            $response = Unirest\Request::get($url.$appid, $headers, $parameters);
+            
+            $data['sms_templates']  = $response->body->sms_templates;
+            $data['workflows']  = $response->body->workflows;
+            $data['application_id'] = $appid;
+            $this->template->add_title_segment("SMS Form");
+            $this->template->render("sms_form/sms_form",$data);
         }
         else
         {
             $url = site_url('api/sms/send');
-            $appid = 10;
             $headers = array('Accept' => 'application/json');
             $query = array(
                 'MOR-API-KEY' => 'passingkey',
@@ -65,16 +67,8 @@ class Sms_form extends MY_Controller {
                 'sms_template_id' => $this->input->post('inputTemplate'),
                 'application_id' => $appid
             );
-        
             $response = Unirest\Request::post($url, $headers, $query);
-            echo "<pre>";
-            echo $response->code."<br>";
-            var_dump($response->code);
-            
-            var_dump($response->headers['content-type']);
-            
-            var_dump($response->body);
-            echo "</pre>";
+            redirect('/sms-form');
         }
     }
 

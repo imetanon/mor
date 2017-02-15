@@ -29,13 +29,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputTemplate" class="col-sm-2 control-label">Workflow</label>
+                            <label for="inputWorkflow" class="col-sm-2 control-label">Workflow</label>
                             <div class="col-sm-8">
-                                <select class="form-control">
-                                              <option>Department A -- Department B -- Department C</option>
-                                              <option>Department B -- Department C</option>
-                                              <option>Department B -- Department C -- Department A</option>
-                                            </select>
+                                <select id="sms-select-workflow" class="form-control">
+                                    <option data-url="None" value="None">--</option>
+                                    <?php foreach ($workflows as $workflow): ?>
+                                    <option data-url="<?php echo site_url('/api/sms/process/'.$workflow->workflow_id); ?>" value="<?php echo $workflow->workflow_id; ?>"><?php echo $workflow->workflow_name; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputWorkflow" class="col-sm-2 control-label">Workflow - Process</label>
+                            <div class="col-sm-8">
+                                <select id="sms-select-process" class="form-control">
+                                    <option value="None">--</option>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,6 +76,7 @@
                                 <span id="detail">(TH - 70 characters / EN - 160 characters)</span>
                             </div>
                         </div>
+                        <input type="hidden" name="application_id" value="<?php echo $application_id; ?>" />
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary">Submit</button>

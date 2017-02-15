@@ -70,7 +70,29 @@ $(document).ready(function() {
         
     });
     
-    
+    $("#sms-select-workflow").change(function(){
+        var selectedWorkflow = $('#sms-select-workflow option:selected').data('url')
+        if(selectedWorkflow != "None"){
+            $.getJSON( selectedWorkflow, {
+                'MOR-API-KEY': "passingkey"
+            }).done(function( data ) {
+                var $el = $("#sms-select-process").empty();
+                $el.append($("<option></option>").attr("value", "None").text("--"));
+                $.each( data.workflow_processess, function(key, value ) {
+                    $el.append($("<option></option>").attr("value", value.workflow_process_id).text(value.workflow_process_name));
+                   
+                });
+                
+            });
+        }else{
+            var $el = $("#sms-select-process").empty();
+            $el.append($("<option></option>").attr("value", "None").text("--"));
+        }
+        
+        
+        
+    });
+     
     //Workflow Tracking
     
     var navListItems = $('div.setup-panel div a'),
